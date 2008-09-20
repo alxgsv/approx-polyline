@@ -7,7 +7,8 @@ ApproxPolyline = function(gmap, lls, f, range, points){
 
 	// Calculating zoom correction
 	this.len_map = this.get_distance_in_pixels(lls[0], lls[1]);
-	this.len_f = Math.abs(range[1] - range[0]);
+	this.len_f = Math.sqrt(Math.pow(range[1] - range[0], 2) +
+						   Math.pow(f(range[1]) - f(range[0]), 2));
 	this.zoom = this.len_map/this.len_f;
 
 	// Calculating alpha correction
@@ -24,7 +25,6 @@ ApproxPolyline = function(gmap, lls, f, range, points){
 	this.shift = {
 		x: gmap.fromLatLngToContainerPixel(this.lls[0]).x - this.relative_point.x,
 		y: gmap.fromLatLngToContainerPixel(this.lls[0]).y - this.relative_point.y
-
 	}
 }
 
@@ -63,7 +63,10 @@ ApproxPolyline.prototype.get_turn_angle = function(){
 	var xy1 = this.gmap.fromLatLngToContainerPixel(this.lls[1]);
 	var cathetus0 = xy1.x - xy0.x;
 	var cathetus1 = xy1.y - xy0.y;
-	return Math.atan2(cathetus1, cathetus0);
+	var map_angle = Math.atan2(cathetus1, cathetus0);
+	var f_angle = Math.atan2(this.f(this.range[1]) - this.f(this.range[0]),
+							 this.range[1] - this.range[0]);
+	return map_angle - f_angle;
 
 }
 ApproxPolyline.prototype.get_distance_in_pixels = function(ll1, ll2){
