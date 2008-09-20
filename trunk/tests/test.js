@@ -19,12 +19,8 @@ function mapclick(overlay,  latlng,  overlaylatlng){
 	                           longsin, [-2*Math.PI, 2*Math.PI], 40);
 		b = a.get_map_lls();
 		c = new GPolyline(b);
-		//v = new GPolyline(z);
 		start = new GMarker(b[0]);
 		tmap.addOverlay(c);
-		//tmap.addOverlay(v);
-		//tmap.addOverlay(start);
-		//alert((a.angle*180) / Math.PI);
    }
 }
 
