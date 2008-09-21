@@ -16,7 +16,7 @@ function mapclick(overlay,  latlng,  overlaylatlng){
    else if(z.length==1){
 		z.push(latlng);
 		a = new ApproxPolyline(tmap, z,
-	                           Math.tan, [-1, 1], 40);
+	                           longsin, [-2*Math.PI, 2*Math.PI], 60);
 	    console.log(a);
 		b = a.get_map_lls();
 		c = new GPolyline(b);
