@@ -96,7 +96,7 @@ ApproxPolyline.prototype.get_map_lls = function(){
 	*/
 	var pivots = this.get_pivots();
 	var lls = [];
-	for (p in pivots){
+	for (var p=0;pivots.length>p;p++){
 		var x = pivots[p];
 		var y = this.f(x);
 		var ll = this.transform_to_geo({x:x, y:y});
